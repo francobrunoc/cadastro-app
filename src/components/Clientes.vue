@@ -104,12 +104,13 @@
                     cpf: null,
                     dataNascimento: null
                 },
-                clientes: []
+                clientes: [],
+                BASE_URL_CLIENTE: 'http://localhost:8081/cliente/'
             }
         },
         methods: {
             _list: function () {
-                axios.get('http://localhost:8081/cliente/list').then(
+                axios.get(this.BASE_URL_CLIENTE + 'list').then(
                     res => this.clientes = res.data
                 ).catch(err => console.log(err));
                 this._reset()
@@ -119,7 +120,7 @@
                 this.$v.$reset()
             },
             _submit: function () {
-                axios.post('http://localhost:8081/cliente/save', this.cliente).then(
+                axios.post(this.BASE_URL_CLIENTE + 'save', this.cliente).then(
                     this._list
                 ).catch(err => console.log(err))
             },
@@ -131,7 +132,7 @@
             },
             _delete: function (cliente) {
                 if (confirm('Você tem certeza que deseja excluir este cliente?')) {
-                    axios.delete(`http://localhost:8081/cliente/` + cliente.id).then(
+                    axios.delete(this.BASE_URL_CLIENTE + cliente.id).then(
                         this._list
                     ).catch(err => console.log(err));
                 }
