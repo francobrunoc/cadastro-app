@@ -124,12 +124,12 @@
                     quantidade: null
                 },
                 produtos: [],
-                BASE_URL: 'http://localhost:8081/produto/'
+                BASE_URL_PRODUTO: 'http://localhost:8081/produto/'
             }
         },
         methods: {
             _list: function () {
-                axios.get( this.BASE_URL + 'list').then(
+                axios.get( this.BASE_URL_PRODUTO + 'list').then(
                     res => this.produtos = res.data
                 ).catch(err => console.log(err));
                 this._reset()
@@ -139,7 +139,7 @@
                 this.$v.$reset()
             },
             _submit: function () {
-                axios.post(this.BASE_URL + 'save', this.produto).then(
+                axios.post(this.BASE_URL_PRODUTO + 'save', this.produto).then(
                     this._list
                 ).catch(err => console.log(err))
                 this.$v.$reset()
@@ -149,7 +149,7 @@
             },
             _delete: function (produto) {
                 if (confirm('Você tem certeza que deseja excluir este produto?')) {
-                    axios.delete(this.BASE_URL + produto.id).then(
+                    axios.delete(this.BASE_URL_PRODUTO + produto.id).then(
                         this._list
                     ).catch(err => console.log(err));
                 }
